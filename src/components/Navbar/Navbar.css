@@ -1,0 +1,16 @@
+.navbar {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4%;
+    border-bottom: 1.5px solid #a9a9a9;
+}
+
+.navbar .logo {
+    width: max(10%, 4rem);
+}
+
+.navbar .profile {
+    width: 4.2rem;
+}
