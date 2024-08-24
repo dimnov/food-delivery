@@ -1,12 +1,58 @@
+/* 
+--- 1. Typography system
+
+- Font sizes (px):
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px):
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+- Font weight:
+Default: 400
+Medium: 500
+Semi-bold: 600
+Bold: 700
+
+- Line heights:
+Default: 1
+1.05
+1.6
+1.2
+
+- Letter spacing:
+-0.5
+-0.75
+
+--- 2. Colors
+- Primary: #
+- Tints: #
+- Shades: #
+- Accents:
+- Grays:
+#555
+
+--- 5. Border radius
+Default: 9px
+
+*/
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+}
+
+html {
+    font-size: 50%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
-    min-height: 100vh;
+    font-family: sans-serif;
+    line-height: 1;
+    font-weight: 400;
+    overflow-x: hidden;
     background-color: #fcfcfc;
 }
 
@@ -15,8 +61,34 @@ a {
     color: inherit;
 }
 
-hr {
-    border: none;
-    height: 1px;
-    background-color: #a9a9a9;
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #141C24;
+    border-right-color: #B7C7D7;
+    animation: rotate 1s infinite linear;
+}
+
+.spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid #B7C7D7;
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(1turn);
+    }
 }
