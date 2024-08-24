@@ -1,5 +1,7 @@
+import AppRoutes from "./AppRoutes";
+
 function App() {
-  return <h1>giiiisfasd</h1>;
+  return <AppRoutes />;
 }
 
 export default App;
