@@ -7,12 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 function MainLayout() {
   return (
-    <div className="main-layout">
+    <>
       <ToastContainer />
-      <Navbar />
-      <Sidebar />
-      <Main />
-    </div>
+      <div className="main-layout">
+        <Navbar />
+        <Sidebar />
+        <Main />
+      </div>
+    </>
   );
 }
 
