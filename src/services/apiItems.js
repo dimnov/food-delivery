@@ -49,3 +49,11 @@ export async function getAllItems() {
   return data;
 }
 
+export async function removeItemApi(itemId) {
+  const { error } = await supabase.from("items").delete().eq("id", itemId);
+
+  if (error) {
+    throw new Error(error);
+  }
+}
+
