@@ -39,3 +39,13 @@ export async function addItemApi(itemData) {
   }
 }
 
+export async function getAllItems() {
+  const { data, error } = await supabase.from("items").select("*");
+  console.log("gg");
+  if (error) {
+    throw new Error(error);
+  }
+
+  return data;
+}
+
