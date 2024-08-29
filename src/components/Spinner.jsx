@@ -1,7 +1,12 @@
 function Spinner({ size }) {
-  const classSize = size === "big" ? "spinner" : size === "small" && "spinner-mini";
+  const sizeToClassName = {
+    small: "spinner-mini",
+    big: "spinner",
+  };
 
-  return <div className={classSize}></div>;
+  const className = sizeToClassName[size] || "spinner";
+
+  return <div className={className}></div>;
 }
 
 export default Spinner;
