@@ -1,0 +1,76 @@
+.section-add-item {
+    height: inherit;
+    margin-left: max(5vw, 2.5rem);
+    margin-top: 5rem;
+    color: #6d6d6d;
+    font-size: 1.6rem;
+}
+
+.section-add-item form {
+    gap: 2.4rem;
+}
+
+.add-img-upload {
+    max-width: 12rem;
+}
+
+.add-img-upload ion-icon {
+    padding: 2rem;
+    font-size: 4.4rem;
+    border: 1px solid rgba(109, 109, 109, 0.6);
+}
+
+.add-img-upload img {
+    height: 8.6rem;
+    width: 8.6rem;
+}
+
+.add-img-upload ion-icon {
+    cursor: pointer;
+}
+
+.add-product-name,
+.add-product-description {
+    width: max(40%, 28rem);
+}
+
+.add-product-name input,
+.add-product-description textarea {
+    padding: 1rem;
+}
+
+.section-add-item input::placeholder,
+.section-add-item textarea::placeholder {
+    color: #999;
+}
+
+.add-category-price {
+    display: flex;
+    gap: 3rem;
+}
+
+.add-category select:hover {
+    cursor: pointer;
+}
+
+.add-category-price select,
+.add-category-price input {
+    max-width: 12rem;
+    padding: 1rem;
+}
+
+.add-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 12rem;
+    border: none;
+    padding: 1rem;
+    background-color: #000;
+    color: #eee;
+    cursor: pointer;
+}
+
+.add-btn:active {
+    transform: scale(0.95);
+}
