@@ -15,14 +15,14 @@ function Sidebar() {
         <li className="sidebar-option">
           <NavLink to={"items"} end>
             <ion-icon className="icon" name="list-outline"></ion-icon>
-            <p>Items List</p>
+            <span>Items List</span>
           </NavLink>
         </li>
 
         <li className="sidebar-option">
           <NavLink to={"orders"} end>
             <ion-icon className="item-icon" name="cube-outline"></ion-icon>
-            <p>Orders</p>
+            <span>Orders</span>
           </NavLink>
         </li>
       </ul>
