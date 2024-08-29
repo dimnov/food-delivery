@@ -1,10 +1,31 @@
+import { useState } from "react";
 import Spinner from "../../components/Spinner";
 import useItems from "../../hooks/useGetItems";
-import { removeItem } from "../../services/apiItems";
+import useRemoveItem from "../../hooks/useRemoveItem";
 import "./ItemsList.css";
+import ConfirmModal from "./ConfirmModal";
 
 function ItemsList() {
   const { items, isPending, error, count } = useItems();
+  const { removeItem } = useRemoveItem();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentItemId, setCurrentItemId] = useState(null);
+
+  const removeItemHandler = (itemId) => {
+    setCurrentItemId(itemId);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmRemove = (itemId) => {
+    removeItem(itemId);
+    setIsModalOpen(false);
+  };
+
+  const handleCancelRemove = () => {
+    setIsModalOpen(false);
+    setCurrentItemId(null);
+  };
 
   if (isPending) return <Spinner size="big" />;
   if (error) return <p>Error: {error}</p>;
@@ -33,12 +54,22 @@ function ItemsList() {
               <td className="table-cell">{item.category}</td>
               <td className="table-cell price-cell">${item.price}</td>
               <td className="table-cell action-cell">
-                <ion-icon onClick={() => removeItem(item.id)} name="close-outline"></ion-icon>
+                <ion-icon
+                  onClick={() => removeItemHandler(item.id)}
+                  name="close-outline"
+                ></ion-icon>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirmRemove}
+        onCancel={handleCancelRemove}
+        itemId={currentItemId}
+      />
     </section>
   );
 }
