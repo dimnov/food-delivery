@@ -1,0 +1,62 @@
+.navbar {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    width: 15rem;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    color: #49557e;
+    font-size: 2rem;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.navbar button {
+    background: transparent;
+    font-size: 1.6rem;
+    color: #49557e;
+    border: 1px solid tomato;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.navbar button:hover {
+    background-color: #fff4f2;
+}
+
+.navbar .active {
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #49557e;
+}
+
+.navbar li {
+    cursor: pointer;
+}
+
+.navbar-search-icon {
+    position: relative;
+}
+
+.navbar-search-icon .dot {
+    position: absolute;
+    min-width: 1rem;
+    min-height: 1rem;
+    background-color: tomato;
+    border-radius: 5px;
+    top: -0.8rem;
+    right: -0.8rem;
+}
