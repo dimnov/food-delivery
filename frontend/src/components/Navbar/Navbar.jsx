@@ -1,38 +1,55 @@
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
-function Navbar() {
+function Navbar({ setShowLogin }) {
   const [menu, setMenu] = useState("home");
 
+  const { getCartItemsLength } = useContext(StoreContext);
+
+  const isCartEmpty = !getCartItemsLength();
+
   const menuItems = [
-    { id: "home", label: "home" },
-    { id: "menu", label: "menu" },
-    { id: "mobile-app", label: "mobile app" },
-    { id: "contact-us", label: "contact us" },
+    { id: "menu", label: "menu", scroll: "#explore-menu" },
+    { id: "mobile-app", label: "mobile app", scroll: "#app-download" },
+    { id: "contact-us", label: "contact us", scroll: "#footer" },
   ];
 
+  const setShowLoginHandler = () => {
+    setShowLogin((prev) => !prev);
+  };
+
   return (
-    <div className="navbar">
-      <img src={assets.logo} alt="logo" className="logo" />
+    <div className="navbar" id="navbar">
+      <Link to={"/"}>
+        <img src={assets.logo} alt="logo" className="logo" />
+      </Link>
       <ul className="navbar-menu">
+        <Link to={"/"} onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>
+          home
+        </Link>
         {menuItems.map((item) => (
-          <li
+          <a
+            href={item.scroll}
             key={item.id}
             onClick={() => setMenu(item.id)}
             className={menu === item.id ? "active" : ""}
           >
             {item.label}
-          </li>
+          </a>
         ))}
       </ul>
       <div className="navbar-right">
         <img src={assets.search_icon} alt="search" />
         <div className="navbar-search-icon">
-          <img src={assets.basket_icon} alt="basket" />
-          <div className="dot"></div>
+          <Link to={"/cart"}>
+            <img src={assets.basket_icon} alt="basket" />
+          </Link>
+          {isCartEmpty ? null : <div className="dot"></div>}
         </div>
-        <button>sign in</button>
+        <button onClick={setShowLoginHandler}>sign in</button>
       </div>
     </div>
   );
