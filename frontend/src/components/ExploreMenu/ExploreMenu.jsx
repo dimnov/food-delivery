@@ -7,7 +7,7 @@ function ExploreMenu({ category, setCategory }) {
   };
 
   return (
-    <div className="explore-menu" id="explore_menu">
+    <div className="explore-menu" id="explore-menu">
       <h1>Explore out menu</h1>
       <p className="explore-menu-text">
         Choose from a diverse menu featuring a delectable array of dishes. Our mission is to satisfy
