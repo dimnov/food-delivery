@@ -60,3 +60,56 @@
     top: -0.8rem;
     right: -0.8rem;
 }
+
+@media (max-width: 52em) {
+    .navbar .logo {
+        width: 14rem;
+    }
+
+    .navbar-menu {
+        gap: 2rem;
+        font-size: 1.6rem;
+    }
+
+    .navbar-right {
+        gap: 3rem;
+    }
+
+    .navbar-right img {
+        width: 2.2rem;
+    }
+
+    .navbar-right button {
+        padding: 0.8rem 2.5rem;
+    }
+}
+
+@media (max-width: 45em) {
+    .navbar .logo {
+        width: 12rem;
+    }
+
+    .navbar-menu {
+        gap: 1.5rem;
+        font-size: 1.6rem;
+    }
+
+    .navbar-right {
+        gap: 2rem;
+    }
+
+    .navbar-right img {
+        width: 2rem;
+    }
+
+    .navbar-right button {
+        padding: 0.7rem 2rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 37em) {
+    .navbar-menu {
+        display: none;
+    }
+}
