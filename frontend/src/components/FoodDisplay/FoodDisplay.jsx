@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import "./FoodDisplay.css";
-import { StoreContext } from "../../context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
+import useGetAllItems from "../../hooks/useGetAllItems";
+import "./FoodDisplay.css";
 
 function FoodDisplay({ category }) {
-  const { food_list } = useContext(StoreContext);
+  const { items } = useGetAllItems();
 
   const filteredFoodList =
-    category === "all" ? food_list : food_list.filter((food) => food.category === category);
+    category === "all" ? items : items.filter((food) => food.category === category);
 
   return (
     <div className="food-display" id="food-display">
