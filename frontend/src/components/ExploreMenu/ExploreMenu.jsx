@@ -1,7 +1,9 @@
+import useGetCategories from "../../hooks/useGetCategories";
 import "./ExploreMenu.css";
-import { menu_list } from "../../assets/assets";
 
 function ExploreMenu({ category, setCategory }) {
+  const { categories } = useGetCategories();
+
   const setCategoryHandler = (itemMenuName) => {
     setCategory((prev) => (prev === itemMenuName ? "all" : itemMenuName));
   };
@@ -14,19 +16,19 @@ function ExploreMenu({ category, setCategory }) {
         your cravings and elevate your dining experience, one delicious meal at a time.
       </p>
       <div className="explore-menu-list">
-        {menu_list.map((item, index) => {
+        {categories.map((cat, index) => {
           return (
             <div
               key={index}
               className="explore-menu-list-item"
-              onClick={() => setCategoryHandler(item.menu_name)}
+              onClick={() => setCategoryHandler(cat.name)}
             >
               <img
-                className={category === item.menu_name ? "active" : ""}
-                src={item.menu_image}
-                alt="menu food"
+                className={category === cat.name ? "active" : ""}
+                src={cat.image_url}
+                alt="food menu image"
               />
-              <p>{item.menu_name}</p>
+              <p>{cat.name}</p>
             </div>
           );
         })}
