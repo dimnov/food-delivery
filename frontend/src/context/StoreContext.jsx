@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
-import { food_list } from "../assets/assets";
+import { createContext, useEffect, useState } from "react";
+import { getAllItems } from "../services/apiItems";
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
+  const [foodList, setFoodList] = useState([]);
 
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
@@ -34,7 +35,7 @@ const StoreContextProvider = (props) => {
     let totalAmount = 0;
 
     for (const item in cartItems) {
-      let itemInfo = food_list.find((product) => product._id === item);
+      let itemInfo = foodList.find((product) => product._id === item);
 
       totalAmount += itemInfo.price * cartItems[item];
     }
@@ -47,8 +48,25 @@ const StoreContextProvider = (props) => {
     return length;
   };
 
+  const fetchFoodList = async () => {
+    try {
+      const items = await getAllItems();
+      setFoodList(items);
+    } catch (error) {
+      console.error("Error fetching food list:", error);
+    }
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      await fetchFoodList();
+    };
+
+    loadData();
+  }, []);
+
   const contextValue = {
-    food_list,
+    foodList,
     cartItems,
     setCartItems,
     addToCart,
