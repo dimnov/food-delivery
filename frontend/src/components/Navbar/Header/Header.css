@@ -45,3 +45,23 @@
     background-color: #262626;
     color: #fff;
 }
+
+@media (max-width: 52em) {
+    .header-contents {
+        max-width: 45%;
+    }
+}
+
+@media (max-width: 37em) {
+    .header-contents {
+        max-width: 65%;
+    }
+
+    .header-contents p {
+        display: none;
+    }
+
+    .header-contents button {
+        padding: 2vw 4vw;
+    }
+}
