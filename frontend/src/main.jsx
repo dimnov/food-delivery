@@ -6,6 +6,9 @@ import Home from "./pages/Home/Home";
 import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import StoreContextProvider from "./context/StoreContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -29,7 +32,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StoreContextProvider>
-    <RouterProvider router={router}></RouterProvider>
-  </StoreContextProvider>
+  <QueryClientProvider client={queryClient}>
+    <StoreContextProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </StoreContextProvider>
+  </QueryClientProvider>
 );
