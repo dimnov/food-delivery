@@ -2,9 +2,15 @@ import { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import useGetAllItemsFromCart from "../../hooks/useGetAllItemsFromCart";
 
 function Cart() {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+  const { cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+
+  const ids = Object.keys(cartItems);
+
+  const { items } = useGetAllItemsFromCart(ids);
+  console.log(items);
 
   const totalPrice = getTotalCartAmount();
   const deliveryFee = getTotalCartAmount() === 0 ? 0 : 5;
@@ -24,17 +30,17 @@ function Cart() {
         </div>
         <br />
         <hr />
-        {food_list.map((item, index) => {
-          if (cartItems[item._id] > 0) {
+        {items.map((item, index) => {
+          if (cartItems[item.id] > 0) {
             return (
               <>
                 <div key={index} className="cart-items-title cart-items-item">
                   <img src={item.image} alt="food image" />
                   <p>{item.name}</p>
                   <p>${item.price.toFixed(2)}</p>
-                  <p>x{cartItems[item._id]}</p>
-                  <p>${(item.price * cartItems[item._id]).toFixed(2)}</p>
-                  <p className="cross" onClick={() => removeFromCart(item._id)}>
+                  <p>x{cartItems[item.id]}</p>
+                  <p>${(item.price * cartItems[item.id]).toFixed(2)}</p>
+                  <p className="cross" onClick={() => removeFromCart(item.id)}>
                     X
                   </p>
                 </div>
