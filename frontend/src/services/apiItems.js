@@ -20,3 +20,17 @@ export async function getAllItemsByCategory(category = "burger") {
   return data;
 }
 
+export async function getAllItemsFromCart(ids) {
+  if (!Array.isArray(ids)) {
+    throw new Error("IDs should be an array");
+  }
+
+  const { data, error } = await supabase.from("items").select("*").in("id", ids);
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  return data;
+}
+
