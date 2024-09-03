@@ -10,3 +10,13 @@ export async function getAllItems() {
   return data;
 }
 
+export async function getAllItemsByCategory(category = "burger") {
+  const { data, error } = await supabase.from("items").select("*").eq("category", category);
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  return data;
+}
+
