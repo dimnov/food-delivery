@@ -34,3 +34,12 @@ export async function getAllItemsFromCart(ids) {
   return data;
 }
 
+export async function getAllCategories() {
+  const { data, error } = await supabase.from("categories").select("*");
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  return data;
+}
