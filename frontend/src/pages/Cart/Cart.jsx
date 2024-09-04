@@ -8,9 +8,7 @@ function Cart() {
   const { cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
 
   const ids = Object.keys(cartItems);
-
   const { items } = useGetAllItemsFromCart(ids);
-  console.log(items);
 
   const totalPrice = getTotalCartAmount();
   const deliveryFee = getTotalCartAmount() === 0 ? 0 : 5;
@@ -35,7 +33,7 @@ function Cart() {
             return (
               <>
                 <div key={index} className="cart-items-title cart-items-item">
-                  <img src={item.image} alt="food image" />
+                  <img src={item.image_url} alt="food image" />
                   <p>{item.name}</p>
                   <p>${item.price.toFixed(2)}</p>
                   <p>x{cartItems[item.id]}</p>
