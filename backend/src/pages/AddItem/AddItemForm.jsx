@@ -61,8 +61,8 @@ function AddItemForm({ categories, addItem }) {
           >
             <option value="">Category</option>
             {categories.map((category) => (
-              <option key={category.categories} value={category.categories}>
-                {category.categories}
+              <option className="add-category-item" key={category.name} value={category.name}>
+                {category.name}
               </option>
             ))}
           </select>
