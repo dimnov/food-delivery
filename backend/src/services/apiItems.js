@@ -57,7 +57,7 @@ export async function removeItemApi(itemId) {
 }
 
 export async function getCategories() {
-  const { data, error } = await supabase.from("settings").select("categories");
+  const { data, error } = await supabase.from("categories").select("name");
 
   if (error) {
     throw new Error(error);
