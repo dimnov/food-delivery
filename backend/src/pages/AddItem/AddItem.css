@@ -74,3 +74,7 @@
 .add-btn:active {
     transform: scale(0.95);
 }
+
+.add-category-item {
+    text-transform: capitalize;
+}
