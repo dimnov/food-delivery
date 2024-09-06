@@ -13,3 +13,19 @@ export async function fetchSession() {
   return session;
 }
 
+export async function registerUser({ username, email, password }) {
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        username,
+      },
+    },
+  });
+
+  if (error) {
+    throw new Error(error);
+  }
+}
+
