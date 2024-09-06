@@ -9,7 +9,6 @@ function useGetAllItemsFromCart(ids) {
   } = useQuery({
     queryKey: ["cartItems", ids],
     queryFn: () => getAllItemsFromCart(ids),
-    enabled: ids.length > 0,
   });
 
   return { isPending, items, error };
