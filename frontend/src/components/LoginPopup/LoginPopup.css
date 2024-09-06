@@ -21,6 +21,12 @@
     animation: fadeIn 0.5s;
 }
 
+.form-spinner-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login-popup-title {
     display: flex;
     justify-content: space-between;
