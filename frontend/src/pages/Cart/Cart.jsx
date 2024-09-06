@@ -15,6 +15,16 @@ function Cart() {
 
   const navigate = useNavigate();
 
+
+  if (items.length === 0) {
+    return (
+      <div className="cart empty">
+        <p>Your cart is empty.</p>
+        <button onClick={() => navigate(-1)}>Go back</button>
+      </div>
+    );
+  }
+
   return (
     <div className="cart">
       <div className="cart-items">
