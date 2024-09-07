@@ -4,7 +4,7 @@ import { useLogin } from "../../hooks/useLogin";
 import { useRegister } from "../../hooks/useRegister";
 import "./LoginPopup.css";
 import Spinner from "../Spinner";
-import { useSession } from "../../hooks/useSession";
+// import { useSession } from "../../hooks/useSession";
 
 function LoginPopup({ setShowLogin }) {
   const [currState, setCurrState] = useState("Login");
@@ -17,10 +17,16 @@ function LoginPopup({ setShowLogin }) {
     setShowLogin((prev) => !prev);
   };
 
-  const { login, error, isPending: isPendingLogin } = useLogin(setShowLoginHandler);
-  const { register, isPending: isPendingRegister } = useRegister(setShowLoginHandler);
+  const { login, error: errorLogin, isPending: isPendingLogin } = useLogin(setShowLoginHandler);
+  const {
+    register,
+    error: errorRegister,
+    isPending: isPendingRegister,
+  } = useRegister(setShowLoginHandler);
 
-  const { session } = useSession();
+  const isPending = isPendingLogin || isPendingRegister;
+  const error = errorLogin || errorRegister;
+  // const { session } = useSession();
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -45,7 +51,7 @@ function LoginPopup({ setShowLogin }) {
               type="text"
               name="name"
               id="name"
-              placeholder="Steve Johnson"
+              placeholder="Your name"
               required
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -54,7 +60,7 @@ function LoginPopup({ setShowLogin }) {
             type="email"
             name="email"
             id="email"
-            placeholder="steve@email.com"
+            placeholder="Your email"
             required
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -63,12 +69,12 @@ function LoginPopup({ setShowLogin }) {
             type="password"
             name="password"
             id="password"
-            placeholder="steven123password"
+            placeholder="Your password"
             required
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {isPendingLogin | isPendingRegister ? (
+        {isPending ? (
           <button className="form-spinner-button">
             <Spinner size="small" />
           </button>
@@ -83,12 +89,13 @@ function LoginPopup({ setShowLogin }) {
           </p>
         ) : (
           <>
-            <div className="login-popup-condition">
-              <input type="checkbox" name="" id="" required />
-              <p>I agree to the Terms and Conditions and Privacy Policy.</p>
-            </div>
             <p>
               Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span>
+            </p>
+
+            <p>
+              By continuing, you agree to the <span>Terms of Service</span> and{" "}
+              <span>Privacy Policy</span>.
             </p>
           </>
         )}
