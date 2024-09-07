@@ -66,3 +66,10 @@ export async function addItemToCart({ cartItems, userId }) {
   }
 }
 
+export async function removeItemToCart({ cartItems, userId }) {
+  const { error } = await supabase.from("users").update({ cartItems: cartItems }).eq("id", userId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
