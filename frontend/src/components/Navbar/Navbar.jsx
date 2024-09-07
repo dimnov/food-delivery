@@ -3,13 +3,19 @@ import { assets } from "../../assets/assets";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
+import { useSession } from "../../hooks/useSession";
+import { useLogout } from "../../hooks/useLogout";
 
 function Navbar({ setShowLogin }) {
   const [menu, setMenu] = useState("home");
 
   const { getCartItemsLength } = useContext(StoreContext);
+  const { session } = useSession();
+  const { signOut } = useLogout();
 
-  const isCartEmpty = !getCartItemsLength();
+  const isAuth = session?.user;
+
+  const cartItemsLength = getCartItemsLength();
 
   const menuItems = [
     { id: "menu", label: "menu", scroll: "#explore-menu" },
@@ -47,9 +53,26 @@ function Navbar({ setShowLogin }) {
           <Link to={"/cart"}>
             <img src={assets.basket_icon} alt="basket" />
           </Link>
-          {isCartEmpty ? null : <div className="dot"></div>}
+          {cartItemsLength ? null : <div className="dot"></div>}
         </div>
-        <button onClick={setShowLoginHandler}>sign in</button>
+        {isAuth ? (
+          <div className="navbar-profile">
+            <img src={assets.profile_icon} alt="user profile" />
+            <ul className="nav-profile-dropdown">
+              <li>
+                <img src={assets.bag_icon} alt="" onClick={signOut} />
+                <p>Orders</p>
+              </li>
+              <hr />
+              <li onClick={signOut}>
+                <img src={assets.logout_icon} alt="logout" />
+                <p>Logout</p>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <button onClick={setShowLoginHandler}>sign in</button>
+        )}
       </div>
     </div>
   );
