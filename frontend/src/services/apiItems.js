@@ -43,3 +43,18 @@ export async function getAllCategories() {
 
   return data;
 }
+
+export async function getCartItems(userId) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("cartItems")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  return data.cartItems;
+}
+
