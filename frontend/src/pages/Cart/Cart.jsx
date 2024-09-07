@@ -1,22 +1,31 @@
 import { useContext } from "react";
-import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
-import useGetAllItemsFromCart from "../../hooks/useGetAllItemsFromCart";
+import useGetItemsInCartData from "../../hooks/useGetItemsInCartData";
+import Spinner from "../../components/Spinner";
+import "./Cart.css";
 
 function Cart() {
-  const { cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+  const { removeFromCart, getTotalCartAmount, cartItems, isPendingCartItems, getCartItemsLength } =
+    useContext(StoreContext);
 
   const ids = Object.keys(cartItems);
-  const { items } = useGetAllItemsFromCart(ids);
+  const { items, isPending: isPendingItemsData } = useGetItemsInCartData(ids);
 
   const totalPrice = getTotalCartAmount();
-  const deliveryFee = getTotalCartAmount() === 0 ? 0 : 5;
+  const deliveryFee = getTotalCartAmount() >= 30 ? 0 : 5;
+
+  const isPending = isPendingCartItems || isPendingItemsData;
 
   const navigate = useNavigate();
 
+  if (isPending) {
+    return <Spinner />;
+  }
 
-  if (items.length === 0) {
+  const cartItemsLength = getCartItemsLength();
+
+  if (cartItemsLength) {
     return (
       <div className="cart empty">
         <p>Your cart is empty.</p>
@@ -38,24 +47,23 @@ function Cart() {
         </div>
         <br />
         <hr />
-        {items.map((item, index) => {
-          if (cartItems[item.id] > 0) {
+        {items?.map((item) => {
+          if (cartItems[item.id] > 0)
             return (
-              <>
-                <div key={index} className="cart-items-title cart-items-item">
+              <div key={item.id}>
+                <div className="cart-items-title cart-items-item">
                   <img src={item.image_url} alt="food image" />
                   <p>{item.name}</p>
                   <p>${item.price.toFixed(2)}</p>
                   <p>x{cartItems[item.id]}</p>
                   <p>${(item.price * cartItems[item.id]).toFixed(2)}</p>
                   <p className="cross" onClick={() => removeFromCart(item.id)}>
-                    X
+                    <ion-icon name="close-outline"></ion-icon>
                   </p>
                 </div>
                 <hr />
-              </>
+              </div>
             );
-          }
         })}
       </div>
       <div className="cart-bottom">
@@ -67,7 +75,9 @@ function Cart() {
               <p>${totalPrice.toFixed(2)}</p>
             </div>
             <div className="cart-total-details">
-              <p>Delivery Fee</p>
+              <p>
+                Delivery Fee <i className="cart-total-details-italic">(Free over $30)</i>
+              </p>
               <p>${deliveryFee.toFixed(2)}</p>
             </div>
             <hr />
@@ -82,7 +92,7 @@ function Cart() {
           <div>
             <p>Enter your promo code here:</p>
             <div className="cart-promocode-input">
-              <input type="text" placeholder="123abc123" />
+              <input type="text" placeholder="promo code" />
               <button>Submit</button>
             </div>
           </div>
