@@ -14,7 +14,7 @@ export async function fetchSession() {
 }
 
 export async function registerUser({ username, email, password }) {
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -27,6 +27,23 @@ export async function registerUser({ username, email, password }) {
   if (error) {
     throw new Error(error);
   }
+
+  const userObject = {
+    id: data.user.id,
+    name: username,
+    email: email,
+    cartItems: {},
+    address: "",
+    phone: "",
+  };
+
+  const { error: profileError } = await supabase.from("users").insert(userObject);
+
+  if (profileError) {
+    throw new Error(profileError.message);
+  }
+
+  return data.user;
 }
 
 export async function loginUser({ email, password }) {
@@ -39,7 +56,7 @@ export async function loginUser({ email, password }) {
     throw new Error(error.message);
   }
 
-  return data;
+  return data.user;
 }
 
 export async function logoutUser() {
