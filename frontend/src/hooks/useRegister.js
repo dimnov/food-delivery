@@ -4,17 +4,26 @@ import { registerUser } from "../services/apiUsers";
 export function useRegister(onSuccessCallback) {
   const queryClient = useQueryClient();
 
-  const { mutate: register, isPending } = useMutation({
-    mutationFn: registerUser,
+  const {
+    mutate: register,
+    isPending,
+    error,
+  } = useMutation({
+    mutationFn: ({ username, email, password }) => registerUser({ username, email, password }),
 
-    onSuccess: () => {
+    onSuccess: (user) => {
+      queryClient.setQueriesData(["user"], user.username);
       queryClient.invalidateQueries(["session"]);
 
       if (onSuccessCallback) {
         onSuccessCallback();
       }
     },
+
+    onError: (err) => {
+      console.log(err.message);
+    },
   });
 
-  return { register, isPending };
+  return { register, isPending, error };
 }
