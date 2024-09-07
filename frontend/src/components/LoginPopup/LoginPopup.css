@@ -60,17 +60,7 @@
     background-color: tomato;
     font-size: 1.5rem;
     cursor: pointer;
-}
-
-.login-popup-condition {
-    display: flex;
-    align-items: start;
-    gap: 0.8rem;
-    margin-top: -1rem;
-}
-
-.login-popup-condition input {
-    margin-top: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
 .login-popup p span {
