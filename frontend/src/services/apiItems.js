@@ -10,7 +10,7 @@ export async function getAllItems() {
   return data;
 }
 
-export async function getAllItemsByCategory(category = "burger") {
+export async function getAllItemsByCategory(category) {
   const { data, error } = await supabase.from("items").select("*").eq("category", category);
 
   if (error) {
@@ -20,7 +20,7 @@ export async function getAllItemsByCategory(category = "burger") {
   return data;
 }
 
-export async function getAllItemsFromCart(ids) {
+export async function getItemsInCartData(ids) {
   if (!Array.isArray(ids)) {
     throw new Error("IDs should be an array");
   }
