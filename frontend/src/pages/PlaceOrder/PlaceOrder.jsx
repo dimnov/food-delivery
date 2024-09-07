@@ -6,27 +6,23 @@ function PlaceOrder() {
   const { getTotalCartAmount } = useContext(StoreContext);
 
   const totalPrice = getTotalCartAmount();
-  const deliveryFee = getTotalCartAmount() === 0 ? 0 : 5;
+  const deliveryFee = getTotalCartAmount() >= 30 ? 0 : 5;
 
   return (
     <form className="place-order">
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-fields">
-          <input type="text" placeholder="First name" />
-          <input type="text" placeholder="Last name" />
+          <input type="text" placeholder="Full name" />
+          <input type="text" placeholder="Phone number" />
         </div>
+
         <input type="email" placeholder="Email address" />
-        <input type="text" placeholder="Street" />
         <div className="multi-fields">
-          <input type="text" placeholder="City" />
-          <input type="text" placeholder="State" />
-        </div>
-        <div className="multi-fields">
-          <input type="text" placeholder="Zip code" />
           <input type="text" placeholder="Country" />
+          <input type="text" placeholder="City" />
         </div>
-        <input type="text" placeholder="Phone number" />
+        <input type="text" placeholder="Street" />
       </div>
       <div className="place-order-right">
         <div className="cart-total">
