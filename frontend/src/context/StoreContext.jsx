@@ -1,33 +1,38 @@
 import { createContext, useEffect, useState } from "react";
 import { getAllItems } from "../services/apiItems";
+import useGetCartItems from "../hooks/useGetCartItems";
+import useAddItem from "../hooks/useAddItem";
+import { useSession } from "../hooks/useSession";
+import useRemoveItem from "../hooks/useRemoveItem";
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState({});
   const [foodList, setFoodList] = useState([]);
+
+  const { addItem } = useAddItem();
+  const { removeItem } = useRemoveItem();
+
+  const { session } = useSession();
+  const userId = session?.user.id;
+
+  const { cartItems, isPending: isPendingCartItems } = useGetCartItems(userId);
 
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+      cartItems[itemId] = 1;
     } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+      cartItems[itemId] += 1;
     }
+
+    addItem({ cartItems, userId });
   };
 
   const removeFromCart = (itemId) => {
-    if (cartItems[itemId]) {
-      setCartItems((prev) => {
-        const updatedCart = { ...prev };
+    if (cartItems[itemId] > 0) {
+      cartItems[itemId] -= 1;
 
-        if (updatedCart[itemId] > 1) {
-          updatedCart[itemId] -= 1;
-        } else {
-          delete updatedCart[itemId];
-        }
-
-        return updatedCart;
-      });
+      removeItem({ cartItems, userId });
     }
   };
 
@@ -44,8 +49,8 @@ const StoreContextProvider = (props) => {
   };
 
   const getCartItemsLength = () => {
-    const length = Object.keys(cartItems).length;
-    return length;
+    const allValuesZero = Object.values(cartItems).every((v) => v === 0);
+    return allValuesZero;
   };
 
   const fetchFoodList = async () => {
@@ -68,11 +73,11 @@ const StoreContextProvider = (props) => {
   const contextValue = {
     foodList,
     cartItems,
-    setCartItems,
     addToCart,
     removeFromCart,
     getTotalCartAmount,
     getCartItemsLength,
+    isPendingCartItems,
   };
 
   return <StoreContext.Provider value={contextValue}>{props.children}</StoreContext.Provider>;
