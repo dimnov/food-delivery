@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { useSession } from "../../hooks/useSession";
 import { useLogout } from "../../hooks/useLogout";
@@ -27,6 +27,8 @@ function Navbar({ setShowLogin }) {
     setShowLogin((prev) => !prev);
   };
 
+  const location = useLocation();
+
   return (
     <div className="navbar" id="navbar">
       <Link to={"/"}>
@@ -36,16 +38,18 @@ function Navbar({ setShowLogin }) {
         <Link to={"/"} onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>
           home
         </Link>
-        {menuItems.map((item) => (
-          <a
-            href={item.scroll}
-            key={item.id}
-            onClick={() => setMenu(item.id)}
-            className={menu === item.id ? "active" : ""}
-          >
-            {item.label}
-          </a>
-        ))}
+        {location.pathname === "/"
+          ? menuItems.map((item) => (
+              <a
+                href={item.scroll}
+                key={item.id}
+                onClick={() => setMenu(item.id)}
+                className={menu === item.id ? "active" : ""}
+              >
+                {item.label}
+              </a>
+            ))
+          : null}
       </ul>
       <div className="navbar-right">
         <img src={assets.search_icon} alt="search" />
