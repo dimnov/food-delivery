@@ -29,7 +29,7 @@ function Cart() {
     return (
       <div className="cart empty">
         <p>Your cart is empty.</p>
-        <button onClick={() => navigate(-1)}>Go back</button>
+        <button onClick={() => navigate("/")}>Go back</button>
       </div>
     );
   }
