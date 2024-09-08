@@ -18,10 +18,10 @@ export async function uploadImage(image) {
 
 export async function addItemApi(itemData) {
   if (
-    !itemData.imageUrl |
-    !itemData.name |
-    !itemData.category |
-    !itemData.price |
+    !itemData.imageUrl ||
+    !itemData.name ||
+    !itemData.category ||
+    !itemData.price ||
     !itemData.description
   ) {
     throw new Error("All fields are required!");
