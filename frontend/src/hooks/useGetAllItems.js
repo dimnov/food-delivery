@@ -9,6 +9,7 @@ function useGetAllItems() {
   } = useQuery({
     queryKey: ["items"],
     queryFn: getAllItems,
+    staleTime: 3600000, // 60 minutes
   });
 
   return { isPending, items, error };
