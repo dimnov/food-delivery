@@ -9,6 +9,7 @@ function useGetCategories() {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: getAllCategories,
+    staleTime: 3600000, // 60 minutes
   });
 
   return { isPending, categories, error };
