@@ -26,7 +26,7 @@
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items: center;
     color: grey;
-    font-size: max(1vw, 1.2rem);
+    font-size: max(1vw, 1.4rem);
 }
 
 .cart-items-item {
@@ -44,12 +44,16 @@
     border: none;
 }
 
+.cart-items-item ion-icon {
+    font-size: 2.6rem;
+}
+
 .cart-items-item .cross {
     cursor: pointer;
 }
 
 .cart-bottom {
-    margin-top: 8rem;
+    margin-top: 6rem;
     display: flex;
     justify-content: space-between;
     gap: max(12vw, 2rem);
@@ -143,4 +147,72 @@
     .cart-promocode {
         justify-content: start;
     }
+}
+
+@media (max-width: 25em) {
+    .cart-items-title {
+        gap: 1rem;
+    }
+
+    .cart-items-item:not(:last-child) {
+        gap: 1rem;
+    }
+
+    .cart-items-item img {
+        width: 6rem;
+    }
+
+    .cart-promocode p,
+    .cart-promocode-input input,
+    .cart-promocode-input button {
+        font-size: 2rem;
+    }
+
+    .cart-total,
+    .cart-total p {
+        font-size: 2.2rem;
+    }
+
+    .cart-promocode-input button {
+        width: max(10vw, 12rem);
+    }
+
+    .cart-total-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cart-total button {
+        margin-top: 1rem;
+        width: 80%;
+        font-size: 1.8rem;
+    }
+
+}
+
+@media (max-width: 19em) {
+    .cart-items-title {
+        gap: 1rem;
+        font-size: max(1vw, 1.2rem);
+    }
+
+    .cart-items-item img {
+        width: 6rem;
+    }
+
+    .cart-total button {
+        width: 100%;
+    }
+
+    .cart-promocode-input button {
+        padding: 0.8rem;
+    }
+
+    .cart-promocode p,
+    .cart-promocode-input input,
+    .cart-promocode-input button {
+        font-size: 1.4rem;
+    }
+
 }

@@ -86,7 +86,9 @@ function Cart() {
               <p>${(totalPrice + deliveryFee).toFixed(2)}</p>
             </div>
           </div>
-          <button onClick={() => navigate("/order")}>PROCEED TO CHECKOUT</button>
+          <div className="cart-total-button">
+            <button onClick={() => navigate("/order")}>PROCEED TO CHECKOUT</button>
+          </div>
         </div>
         <div className="cart-promocode">
           <div>

@@ -21,6 +21,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    gap: 1rem;
 }
 
 .food-item-name-rating p {
@@ -74,4 +75,47 @@
 .food-item-counter img {
     width: 3rem;
     cursor: pointer;
+}
+
+@media (max-width: 636px) {
+    .food-item-img-container .add {
+        width: 5.2rem;
+    }
+
+    .food-item-counter {
+        gap: 1.5rem;
+        font-size: 3rem;
+    }
+
+    .food-item-counter img {
+        width: 4rem;
+    }
+
+    .food-item-name-rating p {
+        font-size: 2.4rem;
+
+    }
+
+    .food-item-description {
+        font-size: 1.8rem;
+    }
+
+    .food-item-price {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 19em) {
+    .food-item-img-container .add {
+        width: 4.4rem;
+    }
+
+    .food-item-counter {
+        gap: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .food-item-counter img {
+        width: 3.2rem;
+    }
 }

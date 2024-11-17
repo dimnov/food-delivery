@@ -63,10 +63,12 @@ function Navbar({ setShowLogin }) {
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="user profile" />
             <ul className="nav-profile-dropdown">
-              <li>
-                <img src={assets.bag_icon} alt="" onClick={signOut} />
-                <p>Orders</p>
-              </li>
+              <Link to={"/orders"}>
+                <li>
+                  <img src={assets.bag_icon} alt="" onClick={signOut} />
+                  <p>Orders</p>
+                </li>
+              </Link>
               <hr />
               <li onClick={signOut}>
                 <img src={assets.logout_icon} alt="logout" />
